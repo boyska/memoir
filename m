@@ -26,8 +26,12 @@ if len( lines ) > 1:
     memoir_path = os.path.expanduser( '~/.memoir' )
 
     # prepend a seperator only if the file exists ( there are entries already in there )
+    if 'MEMOIR_USER' in os.environ:
+        user = os.environ['MEMOIR_USER']
+    else:
+        user = ''
     if os.path.exists( memoir_path ):
-        lines.insert( 0, '--------------------\n' )
+        lines.insert( 0, '-------------------%s-\n' % (user,) )
 
     with open( memoir_path, 'a' ) as f:
         f.writelines( lines )
