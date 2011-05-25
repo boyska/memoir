@@ -23,7 +23,11 @@ else:
 
 # only write the entry if the user entered something
 if len( lines ) > 1:
-    memoir_path = os.path.expanduser( '~/.memoir' )
+    if 'MEMOIR_PATH' in os.environ:
+        basepath = os.environ['MEMOIR_PATH']
+    else:
+        basepath = '~/.memoir'
+    memoir_path = os.path.expanduser(basepath)
 
     # prepend a seperator only if the file exists ( there are entries already in there )
     if 'MEMOIR_USER' in os.environ:
